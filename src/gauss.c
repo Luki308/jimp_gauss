@@ -15,14 +15,10 @@ int eliminate(Matrix *mat, Matrix *b){
 			double skalar = mat->data[w][k]/mat->data[k][k];
 			for (int i = k;i < mat->c;i++)
 			{
-				mat->data[w][i]=mat->data[w][k]- skalar * mat->data[k][i];
-				printf("%f, ", mat->data[w][i]);
+				mat->data[w][i]=mat->data[w][i] - skalar * mat->data[k][i];
 			}
-			printf("\n");
 		}
 	}
-	printToScreen(mat);
-
 		return 0;
 }
 
