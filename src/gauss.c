@@ -14,7 +14,7 @@ int eliminate(Matrix *mat, Matrix *b)
 	{
 		double max = fabs(mat->data[k][k]);
 		int wmax = k;
-		for (int w = k + 1;w < mat->r;w++)
+		for (int w = k + 1;w < mat->c;w++)
 		{
 			if (max < fabs(mat->data[w][k]))
 			{
@@ -30,11 +30,10 @@ int eliminate(Matrix *mat, Matrix *b)
 			return 1;
 		}
 		else {
-			for (int w = k + 1;w < mat->r;w++)
+			for (int w = k + 1;w < mat->c;w++)
 			{
 				double skalar = mat->data[w][k] / mat->data[k][k];
-				int i;
-				for (i = k;i < mat->c;i++)
+				for (int i = k;i < mat->c;i++)
 				{
 					mat->data[w][i] = mat->data[w][i] - skalar * mat->data[k][i];
 				}
