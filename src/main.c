@@ -17,10 +17,21 @@ int main(int argc, char ** argv) {
 	printToScreen(b);
 
 	res = eliminate(A,b);
+	if (res == 1)
+	{
+		printf(stderr, "Błąd! Macierz osobliwa.\n");
+	}
 	x = createMatrix(b->r, 1);
 	if (x != NULL) {
 		res = backsubst(x,A,b);
-
+		if (res == 1)
+		{
+			printf(stderr, "Błąd! Macierz element na diagonali równa się 0.\n");
+		}
+		if (res == 2)
+		{
+			printf(stderr, "Błąd! Macierz nieprawidłowych rozmiarów.\n");
+		}
 		printToScreen(x);
 	  freeMatrix(x);
 	} else {
