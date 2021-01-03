@@ -13,12 +13,12 @@ int main(int argc, char ** argv) {
 
 	if (A == NULL)
     {
-		printf(stderr, "Błąd! Nie wczytano macierzy A!\n");
+		fprintf(stderr, "Błąd! Nie wczytano macierzy A!\n");
         return -1;
     }
 	if (b == NULL) 
     {
-		printf(stderr, "Błąd! Nie wczytano macierzy b!\n");
+		fprintf(stderr, "Błąd! Nie wczytano macierzy b!\n");
         return -2;
     }
 	printToScreen(A);
@@ -28,6 +28,7 @@ int main(int argc, char ** argv) {
 	if (res == 1)
 	{
 		fprintf(stderr, "Błąd! Macierz osobliwa.\n");
+		return res;
 	}
 	x = createMatrix(b->r, 1);
 	if (x != NULL) {
@@ -35,10 +36,12 @@ int main(int argc, char ** argv) {
 		if (res == 1)
 		{
 			fprintf(stderr, "Błąd! Macierz element na diagonali równa się 0.\n");
+			return res;
 		}
-		if (res == 2)
+		else if (res == 2)
 		{
 			fprintf(stderr, "Błąd! Macierz nieprawidłowych rozmiarów.\n");
+			return res;
 		}
 		printToScreen(x);
 	  freeMatrix(x);
