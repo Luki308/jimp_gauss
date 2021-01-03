@@ -1,4 +1,5 @@
 all:
+	@mkdir -p bin
 	gcc -g -Wall --pedantic src/*.c -lm -o bin/gauss
 
 test: all
