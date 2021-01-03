@@ -10,36 +10,41 @@
 
 int eliminate(Matrix *mat, Matrix *b)
 {
-	for (int k = 0;k < mat->c;k++)
+	if (mat->c == mat->r && mat->c == b->r)
 	{
-		double max = fabs(mat->data[k][k]);
-		int wmax = k;
-		for (int w = k + 1;w < mat->c;w++)
+		for (int k = 0;k < mat->c;k++)
 		{
-			if (max < fabs(mat->data[w][k]))
-			{
-				max = fabs(mat->data[w][k]);
-				wmax = w;
-			}
-		}
-        row_swap(mat, k, wmax);
-        row_swap(b, k, wmax);
-
-		if (mat->data[k][k] == 0)
-		{
-			return 1;
-		}
-		else {
+			double max = fabs(mat->data[k][k]);
+			int wmax = k;
 			for (int w = k + 1;w < mat->c;w++)
 			{
-				double skalar = mat->data[w][k] / mat->data[k][k];
-				for (int i = k;i < mat->c;i++)
+				if (max < fabs(mat->data[w][k]))
 				{
-					mat->data[w][i] = mat->data[w][i] - skalar * mat->data[k][i];
+					max = fabs(mat->data[w][k]);
+					wmax = w;
 				}
-				b->data[w][0] = b->data[w][0] - skalar * b->data[k][0];
+			}
+			row_swap(mat, k, wmax);
+			row_swap(b, k, wmax);
+
+			if (mat->data[k][k] == 0)
+			{
+				return 1;
+			}
+			else {
+				for (int w = k + 1;w < mat->c;w++)
+				{
+					double skalar = mat->data[w][k] / mat->data[k][k];
+					for (int i = k;i < mat->c;i++)
+					{
+						mat->data[w][i] = mat->data[w][i] - skalar * mat->data[k][i];
+					}
+					b->data[w][0] = b->data[w][0] - skalar * b->data[k][0];
+				}
 			}
 		}
-	}
 		return 0;
+	}
+	else
+		return 2;
 }

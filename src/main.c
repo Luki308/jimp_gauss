@@ -13,12 +13,12 @@ int main(int argc, char ** argv) {
 
 	if (A == NULL)
     {
-		printf(stderr, "Błąd! Nie wczytano macierzy A!\n");
+		fprintf(stderr, "Błąd! Nie wczytano macierzy A!\n");
         return -1;
     }
 	if (b == NULL) 
     {
-		printf(stderr, "Błąd! Nie wczytano macierzy b!\n");
+		fprintf(stderr, "Błąd! Nie wczytano macierzy b!\n");
         return -2;
     }
 	printToScreen(A);
