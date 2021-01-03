@@ -67,3 +67,9 @@ void freeMatrix(Matrix * mat) {
 	free(mat);
 }
 
+void row_swap(Matrix *m, int row, int max_row)
+{
+    double *tmp = m->data[row];
+    m->data[row] = m->data[max_row];
+    m->data[max_row] = tmp;
+}

@@ -8,13 +8,6 @@
  * Zwraca 1 - macierz osobliwa - dzielenie przez 0
  */
 
-void swap(double *a, double *b)
-{
-    double *tmp = a;
-    a = b;
-    b = tmp;
-}
-
 int eliminate(Matrix *mat, Matrix *b)
 {
 	for (int k = 0;k < mat->c;k++)
@@ -29,11 +22,9 @@ int eliminate(Matrix *mat, Matrix *b)
 				wmax = w;
 			}
 		}
-        printf("%d", wmax); 
-        swap(mat->data[k], mat->data[wmax]);
-        swap(b->data[k], b->data[wmax]);
-//        printToScreen(mat);
-//        printToScreen(b);
+        row_swap(mat, k, wmax);
+        row_swap(b, k, wmax);
+
 		if (mat->data[k][k] == 0)
 		{
 			return 1;
@@ -48,7 +39,6 @@ int eliminate(Matrix *mat, Matrix *b)
 					mat->data[w][i] = mat->data[w][i] - skalar * mat->data[k][i];
 				}
 				b->data[w][0] = b->data[w][0] - skalar * b->data[k][0];
-//				printToScreen(mat);
 			}
 		}
 	}
