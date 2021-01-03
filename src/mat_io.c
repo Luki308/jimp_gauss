@@ -13,17 +13,29 @@ Matrix * readFromFile(char * fname) {
 				Matrix * mat = NULL;
 
 				if (fin != NULL) {
-					fscanf(fin,"%d %d",&r,&c);
-					mat = createMatrix(r,c);
-					if (mat != NULL) {
-						for (ir = 0; ir < r; ir++) 
-							for (ic = 0; ic < c; ic++)
-								fscanf(fin, "%lf",&(mat->data[ir][ic]));
-					} else {
-								fprintf(stderr,"Wystąpił problem podczas tworzenia macierzy o rozmiarach %d x %d dla danych z pliku: %s\n", r, c, fname);
-					}
+					if(fscanf(fin,"%d %d",&r,&c) == 2)
+                    {
+					    mat = createMatrix(r,c);
+					    if (mat != NULL) {
+						    for (ir = 0; ir < r; ir++) 
+							    for (ic = 0; ic < c; ic++)
+								    if(fscanf(fin, "%lf",&(mat->data[ir][ic])) != 1)
+                                    {
+                                        fprintf(stderr, "Błędny format danych wejsciowych z pliku %s!\n", fname);
+                                        freeMatrix(mat);
+                                        fclose(fin);
+                                        return NULL;
+                                    }  
+					    } else {
+						    		fprintf(stderr,"Wystąpił problem podczas tworzenia macierzy o rozmiarach %d x %d dla danych z pliku: %s\n", r, c, fname);
+					    }
 
-					fclose(fin);
+					    fclose(fin);
+                    } else {
+                                    fprintf(stderr, "Błędny format danych wejsciowych z pliku %s!\n", fname);
+                                    fclose(fin);
+                                    return NULL;
+                    }
 				} else {
 								fprintf(stderr,"Nie mogę otworzyć pliku o nazwie: %s\n", fname);
 				}
