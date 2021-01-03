@@ -8,7 +8,9 @@
 int  backsubst(Matrix *x, Matrix *mat, Matrix *b) 
 {
     if(mat->c != mat->r || mat->c != b->r || x->c != 1 || b->c != 1 || x->r != b->r)
+    {
         return 2;
+    }
 
 	for (int i = x->r - 1; i >= 0; i--) 
     {
