@@ -22,6 +22,8 @@ int eliminate(Matrix *mat, Matrix *b){
 				{
 					mat->data[w][i] = mat->data[w][i] - skalar * mat->data[k][i];
 				}
+				b->data[w][0] = b->data[w][0] - skalar * b->data[k][0];
+				printToScreen(b);
 			}
 		}
 	}
