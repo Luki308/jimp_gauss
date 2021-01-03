@@ -1,15 +1,17 @@
 #include "gauss.h"
 #include "mat_io.h"
 #include <stdio.h>
-
+#include <math.h>
 /**
  * Zwraca 0 - elimnacja zakonczona sukcesem
  * Zwraca 1 - macierz osobliwa - dzielenie przez 0
  */
 int eliminate(Matrix *mat, Matrix *b){
-	int w,k;
 	for (k = 0;k < mat->c;k++)
 	{
+		int max,wmax;
+		wmax = k;
+		max = mat->data[k][k];
 		if (mat->data[k][k] == 0)
 		{
 			return 1;
