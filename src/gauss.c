@@ -6,10 +6,22 @@
  * Zwraca 0 - elimnacja zakonczona sukcesem
  * Zwraca 1 - macierz osobliwa - dzielenie przez 0
  */
+
+void swap(double *a, double *b)
+{
+    double *tmp = a;
+    a = b;
+    b = tmp;
+}
+
+
 int eliminate(Matrix *mat, Matrix *b){
-	int w,k;
-	for (k = 0;k < mat->c;k++)
+	for (int k = 0;k < mat->c;k++)
 	{
+        int kmax = 0;
+        swap(mat->data[k], mat->data[kmax]);
+        swap(b->data[k], b->data[kmax]);
+
 		if (mat->data[k][k] == 0)
 		{
 			return 1;
