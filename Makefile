@@ -4,9 +4,15 @@ all:
 
 test: all
 	bin/gauss dane/A dane/b
+	@bin/gauss dane/A dane/b | tail -5 > tmp
+	@if [ "$$(diff tmp dane/wzor_test | wc -l)" = "0" ]; then echo "Wyniki sa prawidlowe!"; else echo "Ktorys z wynikow jest bledny!"; fi
+	@rm tmp
 
 test_zero: all
 	bin/gauss dane/A_z dane/b
+	@bin/gauss dane/A_z dane/b | tail -5 > tmp
+	@if [ "$$(diff tmp dane/wzor_test_zero | wc -l)" = "0" ]; then echo "Wyniki sa prawidlowe!"; else echo "Ktorys z wynikow jest bledny!"; fi
+	@rm tmp
 
 test_zero2: all
 	bin/gauss dane/A_z2 dane/b

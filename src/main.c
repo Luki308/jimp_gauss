@@ -23,10 +23,13 @@ int main(int argc, char ** argv) {
 	    freeMatrix(A);
         return -2;
     }
-	printToScreen(A);
-	printToScreen(b);
+    printf("Macierz A:\n");
+ 	printToScreen(A);
+    printf("\nMacierz b:\n");
+    printToScreen(b);
 
 	res = eliminate(A,b);
+
 	if (res == 1)
 	{
 		fprintf(stderr, "Błąd! Macierz osobliwa.\n");
@@ -34,12 +37,16 @@ int main(int argc, char ** argv) {
 	    freeMatrix(b);
 	    return res;
 	}
+
 	x = createMatrix(b->r, 1);
-	if (x != NULL) {
+
+	if (x != NULL)
+    {
 		res = backsubst(x,A,b);
-		if (res == 1)
+		
+        if (res == 1)
 		{
-			fprintf(stderr, "Błąd! Macierz element na diagonali równa się 0.\n");
+			fprintf(stderr, "Błąd! Zachodzi dzielenie przez 0! (0 występuje na diagonali)\n");
 	        freeMatrix(A);
 	        freeMatrix(b);
 	        freeMatrix(x);
@@ -47,18 +54,22 @@ int main(int argc, char ** argv) {
 		}
 		else if (res == 2)
 		{
-			fprintf(stderr, "Błąd! Macierz nieprawidłowych rozmiarów.\n");
+			fprintf(stderr, "Błąd! Macierz nieprawidłowych rozmiarów. Macierz A musi być kwadratowa, zaś ilość wierszy macierzy b musi odpowiadać ilości kolum macierzy A!\n");
     	    freeMatrix(A);
 	        freeMatrix(b);
 	        freeMatrix(x);
 		    return res;
 		}
-		printToScreen(x);
+	
+        printf("\nWynik:\n");
+    	printToScreen(x);
 	    freeMatrix(x);
-	} else {
-					fprintf(stderr,"Błąd! Nie mogłem utworzyć wektora wynikowego x.\n");
-	                freeMatrix(A);
-	                freeMatrix(b);
+	} 
+    else 
+    {
+		fprintf(stderr,"Błąd! Nie mogłem utworzyć wektora wynikowego x.\n");
+	    freeMatrix(A);
+	    freeMatrix(b);
     }
 
 	freeMatrix(A);
